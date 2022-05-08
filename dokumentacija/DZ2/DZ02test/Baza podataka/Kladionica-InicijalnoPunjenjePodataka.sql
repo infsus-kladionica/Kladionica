@@ -1,0 +1,71 @@
+INSERT INTO korisnik(id, korisnicko_ime, saldo) VALUES
+	('cdb11e8e-8368-41a0-a369-b43e19fb3780', 'test1', 40),
+	('5013d5c4-ae93-4261-bb86-996b15e27a5b', 'test2', 400);
+	
+INSERT INTO uplata(id, korisnik_id, iznos) VALUES
+	('6926f3c6-87bb-4b74-83e2-9202611877a9', 'cdb11e8e-8368-41a0-a369-b43e19fb3780', 100),
+	('3d99209c-92bd-44f1-8b36-7adfa1e95914', '5013d5c4-ae93-4261-bb86-996b15e27a5b', 400),
+	('b4e5d678-faf4-4781-ad18-fc22cde3022b', '5013d5c4-ae93-4261-bb86-996b15e27a5b', 100);
+	
+INSERT INTO sport(id, ime) VALUES
+	('84eca749-ccce-49c9-bf2b-673615b30fcb', 'nogomet'),
+	('15174f2a-66df-4517-97ca-6176ee81d7b9', 'tenis');
+		
+INSERT INTO natjecatelj(id, ime) VALUES
+	('758a2c6c-6b95-4930-8eaa-52209bcd4d1f', 'Real Madrid'),
+	('6fdf3cbb-8194-4f44-8e6d-67c8d48b0880', 'Barcelona'),
+	('40292d2e-3f44-4042-9b52-7143eef0f637', 'Chelsea'),
+	('ad309932-26da-4236-b901-faca85ff9c48', 'Liverpool'),
+	('af84e569-a973-4da8-9522-b1f1c2796f3b', 'Novak Đoković'),
+	('54be6577-9066-4b28-831b-05195e96c06e', 'Roger Federer');
+
+INSERT INTO dogadaj(id, naziv, vrijeme_pocetka, sport_id, domacin_id, gost_id) VALUES
+	('dc284494-0a29-405c-a249-e773a1e95856', 'Real Madrid-Barcelona', '2022-06-07 21:00:00+01', '84eca749-ccce-49c9-bf2b-673615b30fcb', '758a2c6c-6b95-4930-8eaa-52209bcd4d1f', '6fdf3cbb-8194-4f44-8e6d-67c8d48b0880'),
+	('e0b66249-4236-4a6c-b349-325afb3eb551', 'Liverpool-Chelsea', '2022-06-09 15:00:00+01', '84eca749-ccce-49c9-bf2b-673615b30fcb', 'ad309932-26da-4236-b901-faca85ff9c48', '40292d2e-3f44-4042-9b52-7143eef0f637'),
+	('cc9dc483-b41f-48f9-9ca5-9714d8939d02', 'Novak Đoković-Roger Federer', '2022-06-09 17:00:00+01', '15174f2a-66df-4517-97ca-6176ee81d7b9', 'af84e569-a973-4da8-9522-b1f1c2796f3b', '54be6577-9066-4b28-831b-05195e96c06e'),
+	('15174f2a-66df-4517-97ca-6176ee81d7b9', 'Barcelona-Chelsea', '2022-06-10 21:00:00+01', '84eca749-ccce-49c9-bf2b-673615b30fcb', '6fdf3cbb-8194-4f44-8e6d-67c8d48b0880', '40292d2e-3f44-4042-9b52-7143eef0f637');
+
+INSERT INTO ponuda(id, dogadaj_id, naziv, marza) VALUES
+	('d3015517-0e9c-402e-a4f0-bbba6eeeeca7', 'dc284494-0a29-405c-a249-e773a1e95856', 'osnovna', 10),
+	('1e8b7c22-90b7-47c5-a992-540fe749bc0f', 'e0b66249-4236-4a6c-b349-325afb3eb551', 'osnovna', 10),
+	('25448083-66d8-4069-a62d-23f822c33847', 'cc9dc483-b41f-48f9-9ca5-9714d8939d02', 'osnovna', 8),
+	('c8a1dfd0-0394-4455-9159-949ec973489f', '15174f2a-66df-4517-97ca-6176ee81d7b9', 'osnovna', 10),
+	('cd1fbe3d-817c-4564-a26f-b5e294eb61d5', '15174f2a-66df-4517-97ca-6176ee81d7b9', '1. poluvrijeme', 10),
+	('bedf07a6-24c6-4819-ace3-299791a6b311', '15174f2a-66df-4517-97ca-6176ee81d7b9', '2. poluvrijeme', 10);
+	
+INSERT INTO ishod(id, ponuda_id, naziv, koeficijent) VALUES
+	('d3015517-0e9c-402e-a4f0-bbba6eeeeca7', 'd3015517-0e9c-402e-a4f0-bbba6eeeeca7', '1', 2.30),
+	('b0120f91-9610-4bd0-b665-e24a0e0dd2d4', 'd3015517-0e9c-402e-a4f0-bbba6eeeeca7', 'x', 3.60),
+	('950d8c90-0330-4661-96e3-824d2e613cf2', 'd3015517-0e9c-402e-a4f0-bbba6eeeeca7', '2', 3.20),
+	('5629719e-4f9a-4a9d-aadb-8ef2a45e4cab', '1e8b7c22-90b7-47c5-a992-540fe749bc0f', '1', 3.10),
+	('2333fbd3-96cf-4e8c-8524-c30567c20ad1', '1e8b7c22-90b7-47c5-a992-540fe749bc0f', 'x', 3.50),
+	('7b2f7765-63b8-4c34-b5b3-46137b32807e', '1e8b7c22-90b7-47c5-a992-540fe749bc0f', '2', 2.50),
+	('b29b4730-160c-47d0-bdde-4551ea218fa0', '25448083-66d8-4069-a62d-23f822c33847', '1', 1.70),
+	('e250e39e-2481-4e3d-b0af-17d31041fd14', '25448083-66d8-4069-a62d-23f822c33847', '2', 2.30),
+	('a6916687-c19e-4985-bf25-c4bc03d72b41', 'c8a1dfd0-0394-4455-9159-949ec973489f', '1', 1.80),
+	('12ab35f3-9407-438e-b3a4-f00cd44fb4f4', 'c8a1dfd0-0394-4455-9159-949ec973489f', 'x', 4.00),
+	('0a9db0a7-b799-483e-8332-0db2d106f75c', 'c8a1dfd0-0394-4455-9159-949ec973489f', '2', 3.30),
+	('4392d5e9-bdd2-4559-a189-f6d427f45f6e', 'c8a1dfd0-0394-4455-9159-949ec973489f', '1x', 1.45),
+	('6607856c-6619-4ccf-b65b-e4872b07ca73', 'c8a1dfd0-0394-4455-9159-949ec973489f', 'x2', 2.30),
+	('3b3179a0-d887-45ee-a7c1-cc09c1cdec7f', 'c8a1dfd0-0394-4455-9159-949ec973489f', '12', 1.35),
+	('844e16d7-0c98-4872-991f-15dc42d1ac0e', 'c8a1dfd0-0394-4455-9159-949ec973489f', 'f+2', 3.20),
+	('cfceaa1e-0a46-4b0f-a421-606eb46e4e48', 'cd1fbe3d-817c-4564-a26f-b5e294eb61d5', '1', 2.60),
+	('50f28a0c-ea22-411a-a406-283e07094e99', 'cd1fbe3d-817c-4564-a26f-b5e294eb61d5', 'x', 2.30),
+	('7cbf5ffc-303b-4081-b65a-5254509086d0', 'cd1fbe3d-817c-4564-a26f-b5e294eb61d5', '2', 4.50),
+	('72cc3733-aa54-40ce-a980-b95f12502dd2', 'bedf07a6-24c6-4819-ace3-299791a6b311', '1', 2.70),
+	('a1ddf809-6a8a-465f-aea1-a94e54af37f3', 'bedf07a6-24c6-4819-ace3-299791a6b311', 'x', 2.30),
+	('3614ea1e-2304-4415-841a-291e945b66f0', 'bedf07a6-24c6-4819-ace3-299791a6b311', '2', 4.40);
+	
+INSERT INTO listic(id, korisnik_id, uplata) VALUES
+	('43ee23a3-1842-4802-8d2c-e14b1b0c4d24', 'cdb11e8e-8368-41a0-a369-b43e19fb3780', 10),
+	('bd7ef444-fcfe-4e5b-a309-c9076e61fdcc', 'cdb11e8e-8368-41a0-a369-b43e19fb3780', 50),
+	('d16bbfb7-dc73-4ca1-a923-6993d5fe3951', '5013d5c4-ae93-4261-bb86-996b15e27a5b', 100);
+	
+INSERT INTO listic_ishod(listic_id, ishod_id) VALUES
+	('43ee23a3-1842-4802-8d2c-e14b1b0c4d24', 'd3015517-0e9c-402e-a4f0-bbba6eeeeca7'),
+	('43ee23a3-1842-4802-8d2c-e14b1b0c4d24', '5629719e-4f9a-4a9d-aadb-8ef2a45e4cab'),
+	('43ee23a3-1842-4802-8d2c-e14b1b0c4d24', 'e250e39e-2481-4e3d-b0af-17d31041fd14'),
+	('43ee23a3-1842-4802-8d2c-e14b1b0c4d24', '3614ea1e-2304-4415-841a-291e945b66f0'),
+	('bd7ef444-fcfe-4e5b-a309-c9076e61fdcc', '844e16d7-0c98-4872-991f-15dc42d1ac0e'),
+	('d16bbfb7-dc73-4ca1-a923-6993d5fe3951', '4392d5e9-bdd2-4559-a189-f6d427f45f6e'),
+	('d16bbfb7-dc73-4ca1-a923-6993d5fe3951', 'b0120f91-9610-4bd0-b665-e24a0e0dd2d4');
