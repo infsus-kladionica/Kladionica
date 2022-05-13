@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  server:
+    image: where2go-server:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: server
