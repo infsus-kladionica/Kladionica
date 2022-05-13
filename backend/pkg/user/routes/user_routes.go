@@ -8,7 +8,7 @@ import (
 
 func UserRouter(router *gin.RouterGroup) {
 	//router.POST("/register", handlers.Register())
-	router.POST("/registriraj", handlers.RegistrirajKrosnika())
+	router.POST("/registriraj", handlers.RegistrirajKorisnika())
 
 	// test
 	router.GET("/ping", handlers.Ping())

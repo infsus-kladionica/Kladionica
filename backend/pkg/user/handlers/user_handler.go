@@ -17,7 +17,7 @@ func Ping() gin.HandlerFunc {
 	}
 }
 
-func RegistrirajKrosnika() gin.HandlerFunc {
+func RegistrirajKorisnika() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var user models.Korisnik
 		err := json.NewDecoder(c.Request.Body).Decode(&user)

@@ -18,22 +18,21 @@ const (
 
 var DB *sql.DB
 
-func Pokreni() (*sql.DB, error){
+func Pokreni() error {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
-		return nil, errors.New("neuspješan open baze podataka")
+		return errors.New("neuspješan open baze podataka")
 	}
-	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
-		return nil, errors.New("neuspješan ping baze podataka")
+		return errors.New("neuspješan ping baze podataka")
 	}
 
 	DB = db
 
-	return db, nil
+	return nil
 }

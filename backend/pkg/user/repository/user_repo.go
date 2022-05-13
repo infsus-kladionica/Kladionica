@@ -7,7 +7,7 @@ import (
 
 func DodajKorisnika(korisnik *models.Korisnik) error {
 	sqlTekst := `
-		INSERT INTO kladionica.korisnik (id, korisnicko_ime, saldo, sifra)
+		INSERT INTO korisnik (id, korisnicko_ime, saldo, sifra)
 		VALUES ($1, $2, $3, $4)
 		`
 

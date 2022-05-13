@@ -1,8 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/kladionica/backend/pkg/database"
+)
 
 func main() {
+	err := database.Pokreni()
+	if err != nil {
+		panic(err)
+	}
+	defer database.DB.Close()
+
 	logger, err := buildLogger()
 	if err != nil {
 		fmt.Println(err.Error())
