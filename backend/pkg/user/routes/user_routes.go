@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/kladionica/backend/pkg/user/handlers"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/handlers"
 
 	"github.com/gin-gonic/gin"
 )

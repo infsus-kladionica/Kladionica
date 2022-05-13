@@ -1,4 +1,4 @@
-module github.com/kladionica/backend
+module github.com/infsus-kladionica/Kladionica/backend
 
 go 1.17
 

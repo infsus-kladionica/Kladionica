@@ -1,13 +1,15 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/hashicorp/go-hclog"
-	"github.com/kladionica/backend/cmd/config"
-	"github.com/kladionica/backend/pkg/server"
-	"github.com/kladionica/backend/pkg/user/routes"
 	"os"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/hashicorp/go-hclog"
+
+	"github.com/infsus-kladionica/Kladionica/backend/cmd/config"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/server"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/routes"
 )
 
 func buildRouter() (*gin.Engine, error) {

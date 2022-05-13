@@ -2,11 +2,13 @@ package handlers
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"github.com/kladionica/backend/pkg/models"
-	"github.com/kladionica/backend/pkg/user/service"
-	"net/http"
+
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/models"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/service"
 )
 
 var validate = validator.New()
