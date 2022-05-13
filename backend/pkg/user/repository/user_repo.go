@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"github.com/kladionica/backend/pkg/database"
-	"github.com/kladionica/backend/pkg/models"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/database"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/models"
 )
 
 func DodajKorisnika(korisnik *models.Korisnik) error {
