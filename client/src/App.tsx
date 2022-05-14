@@ -1,15 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
 
+import NavBar from './components/NavBar';
 import Register from "./components/Register";
 import Login from './components/Login';
+import Home from './components/Home';
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
-      <Register />
-      <Login />
+      <NavBar/>
+      <div className="container mt-3">
+        <Routes>
+          <Route path="/" element={<Login/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
+          <Route path="/home" element={<Home/>} />
+        </Routes>
+      </div>
     </>
   );
 }
