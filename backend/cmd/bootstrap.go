@@ -19,7 +19,7 @@ func buildRouter() (*gin.Engine, error) {
 
 	corsConfig := cors.DefaultConfig()
 
-	corsConfig.AllowOrigins = []string{"https://example.com"}
+	corsConfig.AllowOrigins = []string{"*"}
 	// To be able to send tokens to the server.
 	corsConfig.AllowCredentials = true
 
