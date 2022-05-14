@@ -5,7 +5,7 @@ const register = (data: IKorisnik) => {
   return http.post<IKorisnik>("/korisnik/registriraj", data);
 };
 const login = (data: IKorisnik) => {
-  return http.post<IKorisnik>("/korisnik/prijavi", data);
+  return http.post<IKorisnik>("/korisnik/prijava", data);
 };
 
 const KorisnikService = {

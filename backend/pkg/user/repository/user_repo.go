@@ -20,7 +20,7 @@ func DodajKorisnika(korisnik *models.Korisnik) error {
 
 func ProvjeriKorisnika(korisnik *models.Korisnik) (bool, error) {
 	var count int
-	row := database.DB.QueryRow("SELECT COUNT(*) FROM korisnik WHERE korisnicko_ime = ? AND sifra = ?", korisnik.Korisnicko_ime, korisnik.Sifra)
+	row := database.DB.QueryRow("SELECT COUNT(*) FROM korisnik WHERE korisnicko_ime = $1 AND sifra = $2", korisnik.Korisnicko_ime, korisnik.Sifra)
 	err := row.Scan(&count)
 	if err != nil {
 		return false, err

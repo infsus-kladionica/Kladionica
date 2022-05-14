@@ -14,7 +14,7 @@ func DohvatiPonuduDana(dan time.Time) ([]models.Ponuda, error) {
 	kraj2 := kraj1.Add(59 * time.Minute)
 
 	var dogadaji []models.Dogadaj
-	row := database.DB.QueryRow("SELECT * FROM dogadaj WHERE vrijeme_pocetka > ? AND vrijeme_pocetka <= ?", start, kraj2)
+	row := database.DB.QueryRow("SELECT * FROM dogadaj WHERE vrijeme_pocetka > $1 AND vrijeme_pocetka <= $2", start, kraj2)
 	err := row.Scan(&dogadaji)
 	if err != nil {
 		return []models.Ponuda{}, err
@@ -22,7 +22,7 @@ func DohvatiPonuduDana(dan time.Time) ([]models.Ponuda, error) {
 
 	for _, elem := range dogadaji {
 		var ponudaSaJednogEventa []models.Ponuda
-		row := database.DB.QueryRow("SELECT * FROM ponuda WHERE dogadaj_id = ?", elem.ID)
+		row := database.DB.QueryRow("SELECT * FROM ponuda WHERE dogadaj_id = $1", elem.ID)
 		err := row.Scan(&ponudaSaJednogEventa)
 		if err != nil {
 			return []models.Ponuda{}, err
