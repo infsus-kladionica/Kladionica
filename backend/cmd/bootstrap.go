@@ -4,6 +4,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/hashicorp/go-hclog"
 
@@ -15,6 +16,18 @@ import (
 
 func buildRouter() (*gin.Engine, error) {
 	router := gin.Default()
+
+	corsConfig := cors.DefaultConfig()
+
+	corsConfig.AllowOrigins = []string{"https://example.com"}
+	// To be able to send tokens to the server.
+	corsConfig.AllowCredentials = true
+
+	// OPTIONS method for ReactJS
+	corsConfig.AddAllowMethods("OPTIONS")
+
+	// Register the middleware
+	router.Use(cors.New(corsConfig))
 
 	user := router.Group("/korisnik")
 	routes.UserRouter(user)
