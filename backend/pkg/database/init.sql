@@ -1,5 +1,5 @@
 CREATE table korisnik (
-	id VARCHAR(50) PRIMARY KEY,
+	id VARCHAR(60) PRIMARY KEY,
 	korisnicko_ime VARCHAR(30) NOT NULL UNIQUE,
 	sifra VARCHAR(100) NOT NULL,
 	saldo NUMERIC NOT NULL,
