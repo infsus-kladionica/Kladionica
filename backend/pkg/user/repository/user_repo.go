@@ -2,6 +2,7 @@ package repository
 
 import (
 	"github.com/google/uuid"
+
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/database"
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/models"
 )
