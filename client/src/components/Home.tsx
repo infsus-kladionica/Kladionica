@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Container, Form } from "react-bootstrap";
 
-import EventService from "../services/EventService";
-import IDogadaj from "../types/Dogadaj";
+import {IEvent, IEventListProps} from "../types/Event"
 
-export default function Home() {
-    const [events, setEvents] = useState<IDogadaj[]>([]);
+import EventService from "../services/EventService";
+
+const EventList: React.FC<IEventListProps> = (events: IEventListProps) => {
+    return (
+        <div>
+            <ul>
+            {events.events.map((event: IEvent) => (
+                <li key={event.id}>
+                    <span>{event.naziv}</span>
+                </li>
+            ))}
+            </ul>
+        </div>
+    );
+};
+
+const Home: React.FC = () => {
+    const [events, setEvents] = useState<IEvent[]>([]);
     useEffect(() => {
         const getNext10Events = async () => {
             await EventService.getNext10Events().then((response) => {
-                setEvents(response)
+                setEvents(response.data)
             });
         };
         getNext10Events();
@@ -17,7 +32,9 @@ export default function Home() {
 
     return (
     <div>
-      Evo me na Homeu
+      <EventList events={events}/>
     </div>
   );
 };
+
+export default Home;

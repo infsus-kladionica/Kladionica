@@ -1,8 +1,8 @@
 import http from "../common/http-common";
-import IDogadaj from "../types/Dogadaj";
+import {IEvent} from "../types/Event";
 
 const getNext10Events = () => {
-  return http.get<IDogadaj[]>("/event/getNext10Events");
+  return http.get<IEvent[]>("/event/getNext10Events");
 };
 
 const EventService = {
