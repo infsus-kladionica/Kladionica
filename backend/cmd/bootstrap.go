@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/go-hclog"
 
 	"github.com/infsus-kladionica/Kladionica/backend/cmd/config"
-	routes2 "github.com/infsus-kladionica/Kladionica/backend/pkg/offer/routes"
+	routes2 "github.com/infsus-kladionica/Kladionica/backend/pkg/event/routes"
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/server"
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/routes"
 )
@@ -32,8 +32,8 @@ func buildRouter() (*gin.Engine, error) {
 	user := router.Group("/korisnik")
 	routes.UserRouter(user)
 
-	ponuda := router.Group("/ponuda")
-	routes2.OfferRouter(ponuda)
+	dogadaji := router.Group("/dogadaji")
+	routes2.DogadajiRouter(dogadaji)
 
 	err := router.Run(":8080")
 
