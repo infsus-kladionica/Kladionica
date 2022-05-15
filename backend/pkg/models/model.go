@@ -32,12 +32,33 @@ type Dogadaj struct {
 	Gost_id          string             `json:"gost_id"`
 }
 
+type DogadajResponse struct {
+	ID string `json:"id"`
+	Naziv string `json:"naziv"`
+	Vrijeme_pocetka string `json:"vrijeme_pocetka"`
+	Sport string `json:"sport"`
+	Domacin string `json:"domacin"`
+	Gost string `json:"gost"`
+}
+
 type Ponuda struct {
 	ID          string             `json:"id"`
 	Dogadaj_id          string             `json:"dogadaj_id"`
 	Naziv          string             `json:"naziv"`
 	Marza          string             `json:"marza"`
 	Završeno          string             `json:"završeno"`
+}
+
+type MarketResponse struct {
+	ID          string             `json:"id"`
+	Naziv          string             `json:"naziv"`
+	Ishodi          []OddResponse             `json:"ishodi"`
+}
+
+type OddResponse struct {
+	ID          string             `json:"id"`
+	Naziv          string             `json:"naziv"`
+	Koeficijet          float64             `json:"koeficijent"`
 }
 
 type Ishod struct {

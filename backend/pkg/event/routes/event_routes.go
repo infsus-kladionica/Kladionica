@@ -9,6 +9,7 @@ import (
 func DogadajiRouter(router *gin.RouterGroup) {
 	//router.POST("/register", handlers.Register())
 	router.GET("/iducih-10", handlers.DohvatiDogadaje())
+	router.GET("/:id/markets", handlers.GetEventMarkets())
 	// router.GET("/ponuda-po-dogadaju/:dogadajID", handlers.DohvatiPonuduPoDogadaju())
 
 }

@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import Register from "./components/Register";
 import Login from './components/Login';
 import Home from './components/Home';
+import EventPage from './components/EventPage';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/home" element={<Home/>} />
+          <Route path="/event/:id" element={<EventPage />} />
         </Routes>
       </div>
     </>

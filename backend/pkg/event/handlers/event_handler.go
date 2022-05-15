@@ -16,8 +16,19 @@ func DohvatiDogadaje() gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(http.StatusOK, gin.H{
-			"data": dogadaji,
-		})
+		c.JSON(http.StatusOK, dogadaji)
+	}
+}
+
+func GetEventMarkets() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		id := c.Param("id")
+		markets, err := service.GetEventMarkets(id)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err})
+			return
+		}
+
+		c.JSON(http.StatusOK, markets)
 	}
 }
