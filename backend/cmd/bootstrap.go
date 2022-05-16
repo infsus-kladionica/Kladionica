@@ -11,6 +11,7 @@ import (
 	"github.com/infsus-kladionica/Kladionica/backend/cmd/config"
 	routes2 "github.com/infsus-kladionica/Kladionica/backend/pkg/event/routes"
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/server"
+	routes3 "github.com/infsus-kladionica/Kladionica/backend/pkg/ticket/routes"
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/routes"
 )
 
@@ -34,6 +35,9 @@ func buildRouter() (*gin.Engine, error) {
 
 	dogadaji := router.Group("/dogadaji")
 	routes2.DogadajiRouter(dogadaji)
+
+	tickets := router.Group("/ticket")
+	routes3.TicketRouter(tickets)
 
 	err := router.Run(":8080")
 
