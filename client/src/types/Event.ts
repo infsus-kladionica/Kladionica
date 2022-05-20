@@ -21,12 +21,30 @@ export interface IMarket {
     ishodi: IOdd[]
 };
 
+export interface IMarketList {
+    markets: IMarket[]
+};
+
+export const emptyMarketList: IMarketList = ({
+    markets: [],
+});
+
 export interface IOdd {
     id: string,
     naziv: string,
     koeficijent: number,
-}
-
-export interface IMarketList {
-    markets: IMarket[]
 };
+
+export const emptyOdd: IOdd = ({
+    id: "",
+    naziv: "",
+    koeficijent: 0,
+});
+
+export interface IOddList {
+    odds: IOdd[]
+};
+
+export const emptyOddList: IOddList = ({
+    odds: []
+});
