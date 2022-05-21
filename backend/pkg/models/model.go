@@ -5,6 +5,7 @@ type Korisnik struct {
 	Korisnicko_ime string  `json:"korisnicko_ime"`
 	Sifra          string  `json:"sifra"`
 	Saldo          float64 `json:"saldo"`
+	JeAdmin bool `json:"jeAdmin"`
 }
 
 type Uplata struct {
@@ -65,19 +66,19 @@ type Ishod struct {
 	ID          string `json:"id"`
 	Ponuda_id   string `json:"ponuda_id"`
 	Naziv       string `json:"naziv"`
-	Koeficijent string `json:"koeficijent"`
-	Dobitan     string `json:"dobitan"`
+	Koeficijent float64 `json:"koeficijent"`
+	Dobitan     bool `json:"dobitan"`
 }
 
 type Listic struct {
 	ID          string  `json:"id"`
 	Korisnik_id string  `json:"korisnik_id"`
-	Uplata      string  `json:"uplata"`
+	Uplata      int32  `json:"uplata"`
 	Ishodi      []Ishod `json:"ishodi"`
 }
 
 type OddMarket struct {
-	OdName      string `json:"odd_name"`
+	OddName      string `json:"odd_name"`
 	MarketName  string `json:"market_name"`
 	Koeficijent string `json:"koeficijent"`
 }

@@ -2,24 +2,34 @@ import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
 import { Container, Form, ListGroup } from "react-bootstrap";
 
-import {IEvent, IEventList} from "../types/Event"
+import {emptyEvent, IEvent, IEventList, emptyEventList} from "../types/Event"
 
 import EventService from "../services/EventService";
 
-const EventList: React.FC<IEventList> = (events: IEventList) => {
+type HomeProps = {
+    updateEvent: (arg: IEvent) => void
+};
+
+type EventListProps = {
+    events: IEventList
+    updateEvent: (arg: IEvent) => void
+};
+
+const EventList: React.FC<EventListProps> = (props) => {
     const navigate = useNavigate();
-    const handleClick = (event_id: string) => {
-        navigate(`/event/${event_id}`)
+    const handleClick = (event: IEvent) => {
+        props.updateEvent(event)
+        navigate(`/event/${event.id}`)
     }
 
     return (
         <div>
             <ListGroup>
-                {events.events.map((event: IEvent) => (
-                    <ListGroup.Item key={event.id} onClick={() => handleClick(event.id)}>
+                {props.events.events.map((event: IEvent) => (
+                    <ListGroup.Item key={event.id} onClick={() => handleClick(event)}>
                         <div>
-                            <span>{event.naziv}</span>
-                            <span>{event.vrijeme_pocetka}</span>
+                            <span>{event.naziv} </span>
+                            <span>{event.vrijeme_pocetka} </span>
                             <span>{event.sport}</span>
                         </div>
                     </ListGroup.Item>
@@ -29,13 +39,16 @@ const EventList: React.FC<IEventList> = (events: IEventList) => {
     );
 };
 
-const Home: React.FC = () => {
-    const [events, setEvents] = useState<IEvent[]>([]);
+const Home: React.FC<HomeProps> = (props) => {
+    const [events, setEvents] = useState<IEventList>(emptyEventList);
     const [loader, setLoader] = useState<Boolean>(true);
     useEffect(() => {
+        props.updateEvent(emptyEvent)
         const getNext10Events = async () => {
             await EventService.getNext10Events().then((response) => {
-                let data: IEvent[] = response.data
+                let data: IEventList = ({
+                    events: response.data
+                })
                 setEvents(data)
                 setLoader(false)
             });
@@ -51,7 +64,7 @@ const Home: React.FC = () => {
             )
             :
             (
-                <EventList events={events}/>
+                <EventList events={events} updateEvent={props.updateEvent}/>
             )
         }
     </div>

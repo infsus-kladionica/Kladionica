@@ -1,48 +1,42 @@
 import React, { useEffect, useState } from "react";
+/*
 import { useParams } from 'react-router-dom';
 import { ListGroup, Button } from "react-bootstrap";
 
-import {EventParams, IMarket, IOdd, IOddList, ITicketOddList, ITicketOdd, emptyTicketOddList, IMarketList, emptyOddList, emptyMarketList, IEvent} from "../types/Event"
+import {EventParams, IMarket, IOdd, IOddList, IMarketList, emptyOddList, emptyMarketList} from "../types/Event"
 import EventService from "../services/EventService";
 
 type EventPageProps = {
-    event: IEvent
-    ticketOdds: ITicketOddList,
-    updateOdds: (arg: ITicketOddList) => void
+    odds: IOddList,
+    updateOdds: (arg: IOddList) => void
 };
 
 type MarketListProps = {
-    event: IEvent
     markets: IMarketList,
-    ticketOdds: ITicketOddList,
-    updateOdds: (arg: ITicketOddList) => void
+    odds: IOddList,
+    updateOdds: (arg: IOddList) => void
 }
 
-const MarketList: React.FC<MarketListProps> = (props) => {
-    const [odds, setOdds] = useState<ITicketOddList>(emptyTicketOddList);
+const TicketList: React.FC<MarketListProps> = (props) => {
+    const [_odds, _setOdds] = useState<IOddList>(emptyOddList);
 
     useEffect(() => {
-        setOdds(props.ticketOdds)
-    },[props.ticketOdds])
+        _setOdds(props.odds)
+    },[props.odds])
 
-    const handleClick = (event: IEvent, market: IMarket, odd: IOdd) => {
-        let newTicketOdds = JSON.parse (JSON.stringify(props.ticketOdds))
-        const indexOfObject = (id: string) => newTicketOdds.odds.findIndex((o) => {
-          return o.odd.id === id;
+    const handleClick = (odd: IOdd) => {
+        let newOdds = JSON.parse (JSON.stringify(props.odds))
+        const indexOfObject = (id: string) => newOdds.odds.findIndex((o) => {
+          return o.id === id;
         });
 
         let index: number = indexOfObject(odd.id)
         if (index !== -1) {
-            newTicketOdds.odds.splice(index, 1);
+            newOdds.odds.splice(index, 1);
         } else {
-            const newTicketOdd: ITicketOdd = ({
-                odd: odd,
-                market: market,
-                event: event
-            });
-            newTicketOdds.odds.push(newTicketOdd)
+            newOdds.odds.push(odd)
         }
-        props.updateOdds(newTicketOdds)
+        props.updateOdds(newOdds)
     }
     return (
         <div>
@@ -53,7 +47,7 @@ const MarketList: React.FC<MarketListProps> = (props) => {
                             <span>{market.naziv}</span>
                             {market.ishodi.map((odd: IOdd) => (
                                 <span key={odd.id}>
-                                    <Button variant="outline-info" onClick={() => handleClick(props.event, market, odd)}>
+                                    <Button variant="outline-info" onClick={() => handleClick(odd)}>
                                         {odd.naziv}  {odd.koeficijent}
                                     </Button> 
                                 </span>
@@ -66,10 +60,10 @@ const MarketList: React.FC<MarketListProps> = (props) => {
     );
 };
 
-const EventPage: React.FC<EventPageProps> = (props) => {
+const ProfilePage: React.FC<EventPageProps> = (props) => {
     const {id} = useParams<EventParams>();
     const [markets, setMarkets] = useState<IMarketList>(emptyMarketList);
-    const [odds, setOdds] = useState<ITicketOddList>(emptyTicketOddList);
+    const [_odds, _setOdds] = useState<IOddList>(emptyOddList);
     const [loader, setLoader] = useState<Boolean>(true);
     useEffect(() => {
         const getMarkets = async (event_id: string) => {
@@ -81,8 +75,8 @@ const EventPage: React.FC<EventPageProps> = (props) => {
             });
         };
         getMarkets(id!);
-        setOdds(props.ticketOdds)
-    }, [props.ticketOdds]);
+        _setOdds(props.odds)
+    }, [props.odds]);
 
     return (
     <div>
@@ -92,11 +86,20 @@ const EventPage: React.FC<EventPageProps> = (props) => {
             )
             :
             (
-                <MarketList event={props.event} markets={markets} ticketOdds={props.ticketOdds} updateOdds={props.updateOdds}/>
+                <TicketList />
             )
         }
     </div>
   );
 };
 
-export default EventPage;
+export default ProfilePage;
+*/
+
+const ProfilePage: React.FC = () => {
+    return (
+        <div>ProfilePage</div>
+    )
+}
+
+export default ProfilePage;

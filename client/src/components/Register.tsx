@@ -1,14 +1,23 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Container, Form } from "react-bootstrap";
 
-import KorisnikService from "../services/KorisnikService";
-import IKorisnik from "../types/Korisnik";
+import UserService from "../services/UserService";
+import {IUser} from "../types/User";
 
-export default function Register() {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<IKorisnik>();
-  const onSubmit: SubmitHandler<IKorisnik> = data => {
-    KorisnikService.register(data)
+type RegisterProps = {
+    updateUser: (arg: IUser) => void
+};
+
+const Register: React.FC<RegisterProps> = (props) => {
+  const navigate = useNavigate();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<IUser>();
+  const onSubmit: SubmitHandler<IUser> = data => {
+    UserService.register(data).then((response) => {
+        props.updateUser(response.data);
+        navigate('/');
+    });
   }
 
   console.log(watch("korisnicko_ime")) // watch input value by passing the name of it
@@ -23,3 +32,5 @@ export default function Register() {
     </form>
   );
 };
+
+export default Register;

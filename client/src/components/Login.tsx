@@ -2,18 +2,22 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-import KorisnikService from "../services/KorisnikService";
-import IKorisnik from "../types/Korisnik";
+import UserService from "../services/UserService";
+import {IUser} from "../types/User";
 
-export default function Login() {
-    const navigate = useNavigate();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<IKorisnik>();
-  const onSubmit: SubmitHandler<IKorisnik> = data => {
-    KorisnikService.login(data)
-        .then(() => (navigate('/home')));
+type LoginProps = {
+    updateUser: (arg: IUser) => void
+};
+
+const Login: React.FC<LoginProps> = (props) => {
+  const navigate = useNavigate();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<IUser>();
+  const onSubmit: SubmitHandler<IUser> = data => {
+    UserService.login(data).then((response) => {
+        props.updateUser(response.data);
+        navigate('/');
+    });
   }
-
-  console.log(watch("korisnicko_ime")) // watch input value by passing the name of it
 
   return (
     <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
@@ -25,3 +29,5 @@ export default function Login() {
     </form>
   );
 };
+
+export default Login;
