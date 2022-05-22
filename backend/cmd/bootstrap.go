@@ -30,10 +30,10 @@ func buildRouter() (*gin.Engine, error) {
 	// Register the middleware
 	router.Use(cors.New(corsConfig))
 
-	user := router.Group("/korisnik")
+	user := router.Group("/user")
 	routes.UserRouter(user)
 
-	dogadaji := router.Group("/dogadaji")
+	dogadaji := router.Group("/event")
 	routes2.DogadajiRouter(dogadaji)
 
 	tickets := router.Group("/ticket")

@@ -15,13 +15,13 @@ func PlaceTicket() gin.HandlerFunc {
 		var ticket models.Listic
 		err := json.NewDecoder(c.Request.Body).Decode(&ticket)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "iz inputa neuspješno decodean lisitć"})
+			c.JSON(http.StatusBadRequest, gin.H{"error": err})
 			return
 		}
 
 		insertErr := service.AddTicket(ticket)
 		if insertErr != nil {
-			c.JSON(http.StatusBadRequest, gin.H{"error": "Listić nije uspješno kreiran"})
+			c.JSON(http.StatusBadRequest, gin.H{"error": insertErr})
 			return
 		}
 		c.JSON(http.StatusOK, gin.H{

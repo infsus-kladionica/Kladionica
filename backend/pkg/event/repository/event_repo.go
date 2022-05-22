@@ -8,24 +8,24 @@ import (
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/models"
 )
 
-func DohvatiDogadaje() ([]models.DogadajResponse, error) {
-	sad := time.Now()
-	var dogadaji []models.DogadajResponse
-	rows, err := database.DB.Query("SELECT dogadaj.id, dogadaj.naziv, dogadaj.vrijeme_pocetka, sport.ime, domacin.ime, gost.ime FROM dogadaj JOIN sport ON dogadaj.sport_id = sport.id JOIN natjecatelj AS domacin ON dogadaj.domacin_id = domacin.id JOIN natjecatelj AS gost ON dogadaj.gost_id = gost.id  WHERE dogadaj.vrijeme_pocetka > $1 ORDER BY dogadaj.vrijeme_pocetka ASC LIMIT 10", sad)
+func GetEvents() ([]models.DogadajResponse, error) {
+	now := time.Now()
+	var eventsVar []models.DogadajResponse
+	rows, err := database.DB.Query("SELECT dogadaj.id, dogadaj.naziv, dogadaj.vrijeme_pocetka, sport.ime, domacin.ime, gost.ime FROM dogadaj JOIN sport ON dogadaj.sport_id = sport.id JOIN natjecatelj AS domacin ON dogadaj.domacin_id = domacin.id JOIN natjecatelj AS gost ON dogadaj.gost_id = gost.id  WHERE dogadaj.vrijeme_pocetka > $1 ORDER BY dogadaj.vrijeme_pocetka ASC LIMIT 10", now)
 	if err != nil {
-		return dogadaji, err
+		return eventsVar, err
 	}
 	defer rows.Close()
 	for rows.Next() {
-		var dogadaj models.DogadajResponse
-		err := rows.Scan(&dogadaj.ID, &dogadaj.Naziv, &dogadaj.Vrijeme_pocetka, &dogadaj.Sport, &dogadaj.Domacin, &dogadaj.Gost)
+		var eventVar models.DogadajResponse
+		err := rows.Scan(&eventVar.ID, &eventVar.Naziv, &eventVar.Vrijeme_pocetka, &eventVar.Sport, &eventVar.Domacin, &eventVar.Gost)
 		if err != nil {
 			return []models.DogadajResponse{}, err
 		}
-		dogadaji = append(dogadaji, dogadaj)
+		eventsVar = append(eventsVar, eventVar)
 	}
 
-	return dogadaji, nil
+	return eventsVar, nil
 }
 
 func GetEventMarkets(id string) ([]models.MarketResponse, error) {
@@ -68,7 +68,7 @@ func GetMarketOdds(id string, margin int) ([]models.OddResponse, error) {
 		if err != nil {
 			return []models.OddResponse{}, err
 		}
-		koef := math.Round(temp_koef*after_margin*100)/100
+		koef := math.Round(temp_koef*after_margin*100) / 100
 		odd.Koeficijet = koef
 		odds = append(odds, odd)
 	}
