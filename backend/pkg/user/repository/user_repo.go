@@ -9,7 +9,7 @@ import (
 
 func AddUser(inputUser *models.Korisnik) (string, error) {
 	sqlTxt := `
-		INSERT INTO inputUser (id, korisnicko_ime, saldo, sifra, je_admin)
+		INSERT INTO korisnik (id, korisnicko_ime, saldo, sifra, je_admin)
 		VALUES ($1, $2, $3, $4)
 		`
 
