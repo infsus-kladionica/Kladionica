@@ -75,3 +75,13 @@ func GetMarketOdds(id string, margin int) ([]models.OddResponse, error) {
 
 	return odds, nil
 }
+
+func ChangeOdd(odd models.Ishod) (error) {
+	sqlTekst := `
+		UPDATE ishod SET koeficijent = $1
+			WHERE id = $2;
+		`
+
+	_, err := database.DB.Exec(sqlTekst, odd.Koeficijent, odd.ID)
+	return err
+}

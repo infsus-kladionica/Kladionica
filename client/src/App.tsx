@@ -10,6 +10,7 @@ import EventPage from './components/EventPage';
 import Ticket from './components/Ticket';
 import { ITicketOddList, emptyTicketOddList, IEvent, emptyEvent } from './types/Event';
 import { IUser, emptyUser } from './types/User';
+import ProfilePage from './components/ProfilePage';
 
 const App: React.FC = () => {
   const [odds, setOdds] = useState<ITicketOddList>(emptyTicketOddList);
@@ -44,7 +45,8 @@ const App: React.FC = () => {
               <Route path="/" element={<Home updateEvent={updateEvent}/>} />
               <Route path="/login" element={<Login updateUser={updateUser}/>} />
               <Route path="/register" element={<Register updateUser={updateUser}/>} />
-              <Route path="/event/:id" element={<EventPage event={event} ticketOdds={odds} updateOdds={updateOdds}/>} />
+              <Route path="/event/:id" element={<EventPage event={event} ticketOdds={odds} updateOdds={updateOdds} user={user}/>} />
+              <Route path="/profile" element={<ProfilePage user={user}/>} />
             </Routes>
           </div>
             {odds.odds.length > 0 && (

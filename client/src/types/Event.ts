@@ -89,3 +89,19 @@ export interface ITicketOddList {
 export const emptyTicketOddList: ITicketOddList = ({
     odds: []
 });
+
+export interface IOddMarket {
+    id: string,
+    odd_name: string,
+    market_name: string,
+    event_name: string,
+    koeficijent: number
+}
+
+export const emptyOddMarket: IOddMarket = ({
+    id: "",
+    odd_name: "",
+    market_name: "",
+    event_name: "",
+    koeficijent: 0,
+});

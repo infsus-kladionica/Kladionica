@@ -78,8 +78,10 @@ type Listic struct {
 }
 
 type OddMarket struct {
+	ID string `json:"id"`
 	OddName      string `json:"odd_name"`
 	MarketName  string `json:"market_name"`
+	EventName  string `json:"event_name"`
 	Koeficijent string `json:"koeficijent"`
 }
 

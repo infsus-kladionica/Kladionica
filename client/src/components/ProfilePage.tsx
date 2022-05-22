@@ -1,57 +1,39 @@
 import React, { useEffect, useState } from "react";
-/*
+
 import { useParams } from 'react-router-dom';
 import { ListGroup, Button } from "react-bootstrap";
 
-import {EventParams, IMarket, IOdd, IOddList, IMarketList, emptyOddList, emptyMarketList} from "../types/Event"
-import EventService from "../services/EventService";
+import {EventParams, IMarket, IOdd, IOddList, IMarketList, emptyOddList, emptyMarketList, IOddMarket} from "../types/Event"
+import {IUser} from "../types/User"
+import TicketService from "../services/TicketService";
+import { emptyUserTicketList, IUserTicket, IUserTicketList } from "../types/Ticket";
 
-type EventPageProps = {
-    odds: IOddList,
-    updateOdds: (arg: IOddList) => void
+type ProfilePageProps = {
+    user: IUser
 };
 
-type MarketListProps = {
-    markets: IMarketList,
-    odds: IOddList,
-    updateOdds: (arg: IOddList) => void
+type UserTicketListProps = {
+    userTickets: IUserTicketList
 }
 
-const TicketList: React.FC<MarketListProps> = (props) => {
-    const [_odds, _setOdds] = useState<IOddList>(emptyOddList);
-
-    useEffect(() => {
-        _setOdds(props.odds)
-    },[props.odds])
-
-    const handleClick = (odd: IOdd) => {
-        let newOdds = JSON.parse (JSON.stringify(props.odds))
-        const indexOfObject = (id: string) => newOdds.odds.findIndex((o) => {
-          return o.id === id;
-        });
-
-        let index: number = indexOfObject(odd.id)
-        if (index !== -1) {
-            newOdds.odds.splice(index, 1);
-        } else {
-            newOdds.odds.push(odd)
-        }
-        props.updateOdds(newOdds)
-    }
+const UserTicketList: React.FC<UserTicketListProps> = (props) => {
     return (
         <div>
             <ListGroup>
-                {props.markets.markets.map((market: IMarket) => (
-                    <ListGroup.Item key={market.id}>
+                {props.userTickets.userTickets.map((userTicket: IUserTicket) => (
+                    <ListGroup.Item key={userTicket.id}>
                         <div>
-                            <span>{market.naziv}</span>
-                            {market.ishodi.map((odd: IOdd) => (
-                                <span key={odd.id}>
-                                    <Button variant="outline-info" onClick={() => handleClick(odd)}>
-                                        {odd.naziv}  {odd.koeficijent}
-                                    </Button> 
-                                </span>
-                            ))}
+                            <div>Ticket</div>
+                            <ListGroup>
+                                {userTicket.odd_markets.map((oddMarket: IOddMarket) => (
+                                    <ListGroup.Item key={oddMarket.id}>
+                                        <>
+                                            <span>{oddMarket.event_name} - {oddMarket.market_name} - {oddMarket.odd_name}: {oddMarket.koeficijent}</span>
+                                        </>
+                                    </ListGroup.Item>
+                                ))}
+                            </ListGroup>
+                            <></>
                         </div>
                     </ListGroup.Item>
                 ))}
@@ -60,46 +42,35 @@ const TicketList: React.FC<MarketListProps> = (props) => {
     );
 };
 
-const ProfilePage: React.FC<EventPageProps> = (props) => {
-    const {id} = useParams<EventParams>();
-    const [markets, setMarkets] = useState<IMarketList>(emptyMarketList);
-    const [_odds, _setOdds] = useState<IOddList>(emptyOddList);
+const ProfilePage: React.FC<ProfilePageProps> = (props) => {
+    const [userTickets, setUserTickets] = useState<IUserTicketList>(emptyUserTicketList);
     const [loader, setLoader] = useState<Boolean>(true);
     useEffect(() => {
-        const getMarkets = async (event_id: string) => {
-            await EventService.getMarkets(event_id).then((response) => {
-                const data: IMarket[] = response.data
-                const dataList: IMarketList = {markets: data}
-                setMarkets(dataList)
+        const getMarkets = async (user_id: string) => {
+            await TicketService.getUserTickets(user_id).then((response) => {
+                const data: IUserTicket[] = response.data
+                const dataList: IUserTicketList = {userTickets: data}
+                setUserTickets(dataList)
                 setLoader(false)
             });
         };
-        getMarkets(id!);
-        _setOdds(props.odds)
-    }, [props.odds]);
+        console.log("UserID: " + props.user.id)
+        getMarkets(props.user.id!);
+    }, []);
 
     return (
     <div>
         {loader ?
             (
-                <>Loading markets...</>
+                <>Loading tickets...</>
             )
             :
             (
-                <TicketList />
+                <UserTicketList userTickets={userTickets}/>
             )
         }
     </div>
   );
-};
-
-export default ProfilePage;
-*/
-
-const ProfilePage: React.FC = () => {
-    return (
-        <div>ProfilePage</div>
-    )
 }
 
 export default ProfilePage;

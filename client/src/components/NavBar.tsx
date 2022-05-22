@@ -12,6 +12,11 @@ type NavBarProps = {
 
 const NavBar: React.FC<NavBarProps> = (props) => {
     const navigate = useNavigate();
+
+    const handleProfile = () => {
+        navigate("/profile")
+    };
+
     const handleLogOut = () => {
         props.updateUser(emptyUser)
         navigate("/")
@@ -41,7 +46,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
                                 <Nav className="me-auto">
-                                    <Nav.Link href="/profile">{props.user.korisnicko_ime}</Nav.Link>
+                                    <Nav.Link onClick={() => handleProfile()}>{props.user.korisnicko_ime}</Nav.Link>
                                     <Nav.Link onClick={() => handleLogOut()}>Log Out</Nav.Link>
                                 </Nav>
                             </Navbar.Collapse>

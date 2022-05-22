@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"encoding/json"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -30,5 +32,23 @@ func GetEventMarkets() gin.HandlerFunc {
 		}
 
 		c.JSON(http.StatusOK, markets)
+	}
+}
+
+func ChangeOdd() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var odd models.Ishod
+		err := json.NewDecoder(c.Request.Body).Decode(&odd)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err})
+			return
+		}
+
+		err = service.ChangeOdd(odd)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err})
+			return
+		}
+		c.JSON(http.StatusOK, gin.H{"code": "success"})
 	}
 }

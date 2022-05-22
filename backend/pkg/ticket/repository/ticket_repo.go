@@ -33,13 +33,14 @@ func AddTicket(ticket models.Listic) error {
 	return nil
 }
 
-func GeTicketOddMarkets(ticketID string) ([]models.OddMarket, error) {
+func GetTicketOddMarkets(ticketID string) ([]models.OddMarket, error) {
 	var oddMarkets []models.OddMarket
 
 	sqlTekst := `
-		SELECT ishod.naziv, ponuda.naziv, ishod.koeficijent
+		SELECT listic_ishod.ishod_id, ishod.naziv, ponuda.naziv, dogadaj.naziv, ishod.koeficijent
 			FROM listic_ishod JOIN ishod ON listic_ishod.ishod_id = ishod.id
 				JOIN ponuda ON ponuda.id = ishod.ponuda_id
+				JOIN dogadaj ON dogadaj.id = ponuda.dogadaj_id
 			WHERE listic_ishod.listic_id = $1
 		`
 
@@ -50,7 +51,7 @@ func GeTicketOddMarkets(ticketID string) ([]models.OddMarket, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var oddMarket models.OddMarket
-		err := rows.Scan(&oddMarket.OddName, &oddMarket.MarketName, &oddMarket.Koeficijent)
+		err := rows.Scan(&oddMarket.ID, &oddMarket.OddName, &oddMarket.MarketName, &oddMarket.EventName, &oddMarket.Koeficijent)
 		if err != nil {
 			return []models.OddMarket{}, err
 		}
@@ -80,7 +81,7 @@ func GetUserTickets(userID string) ([]models.UserTicketResponse, error) {
 		if err != nil {
 			return []models.UserTicketResponse{}, err
 		}
-		oddMarkets, err := GeTicketOddMarkets(ticket.TicketID)
+		oddMarkets, err := GetTicketOddMarkets(ticket.TicketID)
 		if err != nil {
 			return []models.UserTicketResponse{}, err
 		}

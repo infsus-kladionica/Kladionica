@@ -20,7 +20,7 @@ func AddUser(inputUser *models.Korisnik) (string, error) {
 
 func CheckUser(inputUser *models.Korisnik) (string, error) {
 	var id string
-	row := database.DB.QueryRow("SELECT id FROM inputUser WHERE korisnicko_ime = $1 AND sifra = $2", inputUser.Korisnicko_ime, inputUser.Sifra)
+	row := database.DB.QueryRow("SELECT id FROM korisnik WHERE korisnicko_ime = $1 AND sifra = $2", inputUser.Korisnicko_ime, inputUser.Sifra)
 	err := row.Scan(&id)
 	if err != nil {
 		return "", err

@@ -12,3 +12,7 @@ func GetEvents() ([]models.DogadajResponse, error) {
 func GetEventMarkets(id string) ([]models.MarketResponse, error) {
 	return repository.GetEventMarkets(id)
 }
+
+func ChangeOdd(odd models.Ishod) (error) {
+	return repository.ChangeOdd(odd)
+}
