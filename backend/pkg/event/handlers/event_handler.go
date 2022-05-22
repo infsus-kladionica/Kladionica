@@ -8,15 +8,15 @@ import (
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/event/service"
 )
 
-func DohvatiDogadaje() gin.HandlerFunc {
+func GetEvents() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		dogadaji, err := service.DohvatiDogadaje()
+		events, err := service.GetEvents()
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err})
 			return
 		}
 
-		c.JSON(http.StatusOK, dogadaji)
+		c.JSON(http.StatusOK, events)
 	}
 }
 

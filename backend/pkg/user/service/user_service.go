@@ -5,11 +5,11 @@ import (
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/repository"
 )
 
-func DodajKorisnika(korisnik *models.Korisnik) (string, error) {
-	korisnikID, err := repository.DodajKorisnika(korisnik)
-	return korisnikID, err
+func AddUser(inputUser *models.Korisnik) (string, error) {
+	userID, err := repository.AddUser(inputUser)
+	return userID, err
 }
 
-func ProvjeriKorisnika(korisnik *models.Korisnik) (string, error) {
-	return repository.ProvjeriKorisnika(korisnik)
+func LoginUser(inputUser *models.Korisnik) (string, error) {
+	return repository.CheckUser(inputUser)
 }
