@@ -5,9 +5,9 @@ import (
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/repository"
 )
 
-func DodajKorisnika(korisnik *models.Korisnik) error {
-	err := repository.DodajKorisnika(korisnik)
-	return err
+func DodajKorisnika(korisnik *models.Korisnik) (string, error) {
+	korisnikID, err := repository.DodajKorisnika(korisnik)
+	return korisnikID, err
 }
 
 func ProvjeriKorisnika(korisnik *models.Korisnik) (bool, error) {

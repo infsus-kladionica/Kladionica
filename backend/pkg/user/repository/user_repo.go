@@ -7,15 +7,15 @@ import (
 	"github.com/infsus-kladionica/Kladionica/backend/pkg/models"
 )
 
-func DodajKorisnika(korisnik *models.Korisnik) error {
+func DodajKorisnika(korisnik *models.Korisnik) (string, error) {
 	sqlTekst := `
-		INSERT INTO korisnik (id, korisnicko_ime, saldo, sifra)
+		INSERT INTO korisnik (id, korisnicko_ime, saldo, sifra, je_admin)
 		VALUES ($1, $2, $3, $4)
 		`
 
 	korisnik.ID = uuid.New().String()
-	_, err := database.DB.Exec(sqlTekst, korisnik.ID, korisnik.Korisnicko_ime, 0, korisnik.Sifra)
-	return err
+	_, err := database.DB.Exec(sqlTekst, korisnik.ID, korisnik.Korisnicko_ime, 0, korisnik.Sifra, false)
+	return korisnik.ID, err
 }
 
 func ProvjeriKorisnika(korisnik *models.Korisnik) (bool, error) {

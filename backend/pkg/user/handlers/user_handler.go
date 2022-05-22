@@ -28,8 +28,8 @@ func RegistrirajKorisnika() gin.HandlerFunc {
 			return
 		}
 
-		insertErr := service.DodajKorisnika(&user)
-		if insertErr != nil {
+		user.ID, err = service.DodajKorisnika(&user)
+		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Korisnik nije uspješno kreiran"})
 			return
 		}
