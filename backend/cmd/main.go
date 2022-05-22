@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/kladionica/backend/pkg/database"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/database"
 )
 
 func main() {

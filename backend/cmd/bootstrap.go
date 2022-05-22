@@ -1,20 +1,43 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/hashicorp/go-hclog"
-	"github.com/kladionica/backend/cmd/config"
-	"github.com/kladionica/backend/pkg/server"
-	"github.com/kladionica/backend/pkg/user/routes"
 	"os"
 	"time"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+	"github.com/hashicorp/go-hclog"
+
+	"github.com/infsus-kladionica/Kladionica/backend/cmd/config"
+	routes2 "github.com/infsus-kladionica/Kladionica/backend/pkg/event/routes"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/server"
+	routes3 "github.com/infsus-kladionica/Kladionica/backend/pkg/ticket/routes"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/routes"
 )
 
 func buildRouter() (*gin.Engine, error) {
 	router := gin.Default()
 
+	corsConfig := cors.DefaultConfig()
+
+	corsConfig.AllowOrigins = []string{"*"}
+	// To be able to send tokens to the server.
+	corsConfig.AllowCredentials = true
+
+	// OPTIONS method for ReactJS
+	corsConfig.AddAllowMethods("OPTIONS")
+
+	// Register the middleware
+	router.Use(cors.New(corsConfig))
+
 	user := router.Group("/user")
 	routes.UserRouter(user)
+
+	dogadaji := router.Group("/event")
+	routes2.DogadajiRouter(dogadaji)
+
+	tickets := router.Group("/ticket")
+	routes3.TicketRouter(tickets)
 
 	err := router.Run(":8080")
 

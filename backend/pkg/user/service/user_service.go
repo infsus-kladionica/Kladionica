@@ -1,11 +1,15 @@
 package service
 
 import (
-	"github.com/kladionica/backend/pkg/models"
-	"github.com/kladionica/backend/pkg/user/repository"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/models"
+	"github.com/infsus-kladionica/Kladionica/backend/pkg/user/repository"
 )
 
-func DodajKorisnika(korisnik *models.Korisnik) error {
-	err := repository.DodajKorisnika(korisnik)
-	return err
+func AddUser(inputUser *models.Korisnik) (string, error) {
+	userID, err := repository.AddUser(inputUser)
+	return userID, err
+}
+
+func LoginUser(inputUser *models.Korisnik) (string, error) {
+	return repository.CheckUser(inputUser)
 }
