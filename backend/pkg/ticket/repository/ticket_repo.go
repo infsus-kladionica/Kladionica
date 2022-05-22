@@ -33,8 +33,60 @@ func AddTicket(ticket models.Listic) error {
 	return nil
 }
 
+func GeTicketOddMarkets(ticketID string) ([]models.OddMarket, error) {
+	var oddMarkets []models.OddMarket
+
+	sqlTekst := `
+		SELECT ishod.naziv, ponuda.naziv, ishod.koeficijent
+			FROM listic_ishod JOIN ishod ON listic_ishod.ishod_id = ishod.id
+				JOIN ponuda ON ponuda.id = ishod.ponuda_id
+			WHERE listic_ishod.listic_id = $1
+		`
+
+	rows, err := database.DB.Query(sqlTekst, ticketID)
+	if err != nil {
+		return oddMarkets, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var oddMarket models.OddMarket
+		err := rows.Scan(&oddMarket.OddName, &oddMarket.MarketName, &oddMarket.Koeficijent)
+		if err != nil {
+			return []models.OddMarket{}, err
+		}
+		oddMarkets = append(oddMarkets, oddMarket)
+	}
+
+	return oddMarkets, nil
+}
+
 func GetUserTickets(userID string) ([]models.UserTicketResponse, error) {
 	var tickets []models.UserTicketResponse
+
+	sqlTekst := `
+			SELECT listic.id 
+				FROM listic JOIN korisnik ON korisnik.id = listic.korisnik_id
+				WHERE listic.korisnik_id = $1
+		`
+
+	rows, err := database.DB.Query(sqlTekst, userID)
+	if err != nil {
+		return tickets, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var ticket models.UserTicketResponse
+		err := rows.Scan(&ticket.TicketID)
+		if err != nil {
+			return []models.UserTicketResponse{}, err
+		}
+		oddMarkets, err := GeTicketOddMarkets(ticket.TicketID)
+		if err != nil {
+			return []models.UserTicketResponse{}, err
+		}
+		ticket.OddMarkets = oddMarkets
+		tickets = append(tickets, ticket)
+	}
 
 	return tickets, nil
 }

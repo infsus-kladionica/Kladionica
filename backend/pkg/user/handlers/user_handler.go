@@ -33,9 +33,7 @@ func RegistrirajKorisnika() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Korisnik nije uspješno kreiran"})
 			return
 		}
-		c.JSON(http.StatusOK, gin.H{
-			"data": user,
-		})
+		c.JSON(http.StatusOK, user)
 	}
 }
 
@@ -61,8 +59,6 @@ func PrijavaKorisnik() gin.HandlerFunc {
 
 		korisnik.ID = id
 
-		c.JSON(http.StatusOK, gin.H{
-			"data": korisnik,
-		})
+		c.JSON(http.StatusOK, korisnik)
 	}
 }

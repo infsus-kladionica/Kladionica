@@ -5,7 +5,7 @@ type Korisnik struct {
 	Korisnicko_ime string  `json:"korisnicko_ime"`
 	Sifra          string  `json:"sifra"`
 	Saldo          float64 `json:"saldo"`
-	JeAdmin bool `json:"jeAdmin"`
+	JeAdmin bool `json:"je_admin"`
 }
 
 type Uplata struct {
@@ -85,5 +85,6 @@ type OddMarket struct {
 
 type UserTicketResponse struct {
 	TicketID   string      `json:"id"`
+	Won   int32      `json:"won"`
 	OddMarkets []OddMarket `json:"odd_markets"`
 }

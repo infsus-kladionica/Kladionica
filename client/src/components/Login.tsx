@@ -14,6 +14,7 @@ const Login: React.FC<LoginProps> = (props) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<IUser>();
   const onSubmit: SubmitHandler<IUser> = data => {
     UserService.login(data).then((response) => {
+      console.log(JSON.stringify(response.data))
         props.updateUser(response.data);
         navigate('/');
     });

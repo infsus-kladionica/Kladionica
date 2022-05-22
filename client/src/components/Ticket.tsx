@@ -17,7 +17,7 @@ const Ticket: React.FC<ITicketProps> = (props) => {
     const [amount, setAmount] = useState<number>(5);
 
     useEffect(() => {
-       console.log("UseEffect")
+       console.log("Ticket/UseEffect")
     }, [props.ticketOdds]);
     console.log("Ticket " + props.ticketOdds)
 
@@ -30,6 +30,9 @@ const Ticket: React.FC<ITicketProps> = (props) => {
         });
 
         const placeTicket = async (ticket: ITicket) => {
+            console.log("Ticket:")
+            console.log("Korisnik id:" + ticket.korisnik_id)
+            console.log("Ishodi:" + ticket.ishodi.forEach((i) => console.log(i.koeficijent)))
             await TicketService.placeTicket(ticket).then((response) => {
                 console.log("Placed ticket");
             });

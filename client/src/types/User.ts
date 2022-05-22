@@ -2,8 +2,8 @@ export interface IUser {
     id?: string,
     korisnicko_ime: string,
     sifra: string,
-    saldo?: number
-    isAdmin: boolean
+    saldo?: number,
+    je_admin: boolean
 }
 
 export const emptyUser: IUser = ({
@@ -11,5 +11,5 @@ export const emptyUser: IUser = ({
     korisnicko_ime: "",
     sifra: "",
     saldo: 0,
-    isAdmin: false
+    je_admin: false
 });

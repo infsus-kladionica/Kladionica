@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import { Routes, Route, Link } from "react-router-dom";
 import './App.css';
 
-import { useLocalStorage } from './common/useLocalStorage';
 import NavBar from './components/NavBar';
 import Register from "./components/Register";
 import Login from './components/Login';
@@ -16,22 +15,28 @@ const App: React.FC = () => {
   const [odds, setOdds] = useState<ITicketOddList>(emptyTicketOddList);
   const [event, setEvent] = useState<IEvent>(emptyEvent);
   const [user, setUser] = useState<IUser>(emptyUser);
+  console.log("U App.tsx")
+
+  useEffect(() => {
+    console.log("U App.tsx")
+  }, []);
 
   const updateOdds = (newOdds: ITicketOddList): void => {
     setOdds(newOdds)
   }
 
-  const updateEvent = (event: IEvent): void => {
-    setEvent(event)
+  const updateEvent = (newEvent: IEvent): void => {
+    setEvent(newEvent)
   }
 
   const updateUser = (newUser: IUser): void => {
-    setUser(user)
+    console.log(newUser.id)
+    setUser(newUser)
   }
 
   return (
     <>
-      <NavBar/>
+      <NavBar user={user} updateUser={updateUser}/>
       <div className="container-fluid pt-4">
         <div className="row justify-content-center">
           <div className="col-6">
