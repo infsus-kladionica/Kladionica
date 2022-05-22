@@ -48,16 +48,18 @@ func PrijavaKorisnik() gin.HandlerFunc {
 			return
 		}
 
-		postoji, insertErr := service.ProvjeriKorisnika(&korisnik)
+		id, insertErr := service.ProvjeriKorisnika(&korisnik)
 		if insertErr != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Korisnik nije uspješno kreiran"})
 			return
 		}
 
-		if postoji == false {
+		if id == "" {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Pogrešna šifra ili korisničko ime"})
 			return
 		}
+
+		korisnik.ID = id
 
 		c.JSON(http.StatusOK, gin.H{
 			"data": korisnik,

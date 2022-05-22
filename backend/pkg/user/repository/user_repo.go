@@ -18,18 +18,13 @@ func DodajKorisnika(korisnik *models.Korisnik) (string, error) {
 	return korisnik.ID, err
 }
 
-func ProvjeriKorisnika(korisnik *models.Korisnik) (bool, error) {
-	var count int
-	row := database.DB.QueryRow("SELECT COUNT(*) FROM korisnik WHERE korisnicko_ime = $1 AND sifra = $2", korisnik.Korisnicko_ime, korisnik.Sifra)
-	err := row.Scan(&count)
+func ProvjeriKorisnika(korisnik *models.Korisnik) (string, error) {
+	var id string
+	row := database.DB.QueryRow("SELECT id FROM korisnik WHERE korisnicko_ime = $1 AND sifra = $2", korisnik.Korisnicko_ime, korisnik.Sifra)
+	err := row.Scan(&id)
 	if err != nil {
-		return false, err
+		return "", err
 	}
 
-	postoji := false
-	if count > 0 {
-		postoji = true
-	}
-
-	return postoji, err
+	return id, err
 }

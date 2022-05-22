@@ -10,6 +10,6 @@ func DodajKorisnika(korisnik *models.Korisnik) (string, error) {
 	return korisnikID, err
 }
 
-func ProvjeriKorisnika(korisnik *models.Korisnik) (bool, error) {
+func ProvjeriKorisnika(korisnik *models.Korisnik) (string, error) {
 	return repository.ProvjeriKorisnika(korisnik)
 }
